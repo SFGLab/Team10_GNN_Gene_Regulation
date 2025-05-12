@@ -13,6 +13,7 @@
 ### GNN-GRN approaches:
 1. https://www.sciencedirect.com/science/article/pii/S1568494624006732#da1 - we can treat this as a baseline, they also provide code using PyTorch Geometric
 2. https://www.sciencedirect.com/science/article/pii/S200103702030444X
+3. https://genome.cshlp.org/content/32/5/930.full
 
 ### Misc:
 1. Tunning GNNs (in case we need it): https://machinelearningmastery.com/guide-to-iteratively-tuning-gnns/
