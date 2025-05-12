@@ -8,7 +8,8 @@
 
 ### Ground truth data:
 1. BEELINE: https://pmc.ncbi.nlm.nih.gov/articles/PMC7098173/ and https://zenodo.org/records/3701939
-2. DREAM5: (v.old) https://www.synapse.org/Synapse:syn2820440/wiki/71026
+2. https://bio.liclab.net/scGRN/index.php - not sure if it has more data than pt.1
+3. DREAM5: (v.old) https://www.synapse.org/Synapse:syn2820440/wiki/71026
 
 ### GNN-GRN approaches:
 1. https://www.sciencedirect.com/science/article/pii/S1568494624006732#da1 - we can treat this as a baseline, they also provide code using PyTorch Geometric
