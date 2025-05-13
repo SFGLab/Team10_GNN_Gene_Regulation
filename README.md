@@ -82,6 +82,8 @@
 
 ```
 
+![workflow.png](workflow.png)
+
 ## Main papers/resources:
 
 ### Basic GNNs:
@@ -101,3 +103,7 @@
 ### Misc:
 1. Tunning GNNs (in case we need it): https://machinelearningmastery.com/guide-to-iteratively-tuning-gnns/
 2. More on GRNs: https://www.sciencedirect.com/science/article/pii/S2452310021000184
+
+
+
+   
