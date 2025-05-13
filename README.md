@@ -1,5 +1,58 @@
 # Team10: GNNs for GRNs
 
+## Workflow
+
+#### Data preparation and preprocessing
+
+```mermaid
+flowchart TB
+  %% Phase 1: Data Preparation & Preprocessing
+  subgraph Phase_1["1. Data Preparation & Preprocessing"]
+    A1[Gather input data]
+    A2[Determine exact format of network inputs/outputs]
+    A3[Transform data to required format]
+    A4[Obtain 3D data (ChIA-PET from 4DN)]
+    A5[Upload data to cloud environment]
+    A6[Write preprocessing code for GNN model]
+    A7[Preprocess expression data & outputs]
+    A8[Map Genes/TFs to 3D network locations]
+    A9[[Optional] Add enhancer data from EnhancerDb]
+    A10[Build network; compute features (Paul et al.)]
+    A11[Check alternative features (Wang et al.)]
+    A12[Assess 3D-feature methods]
+    A13[Make holdout set]
+
+    A1 --> A2 --> A3 --> A4 --> A5 --> A6 --> A7 --> A8 --> A9
+    A9 --> A10 --> A11 --> A12 --> A13
+  end
+
+  %% Phase 2: GNN Model Preparation & Technical Runs
+  subgraph Phase_2["2. GNN Model Prep & Technical Runs"]
+    B1[Upload reference notebook; verify imports]
+    B2[Review Wang et al. implementation]
+    B3[Technical run (small dataset); record time]
+    B4[Technical run (subset of actual data)]
+    B5[Train on single cell line (hESC)]
+    B6[Evaluate results & timing]
+    B7[Decide on extra runs; limited parameter tuning]
+
+    A13 --> B1 --> B2 --> B3 --> B4 --> B5 --> B6 --> B7
+  end
+
+  %% Phase 3: Additional Training Scenarios
+  subgraph Phase_3["3. Additional Training Runs"]
+    C1[Disable 3D features; compare performance]
+    C2[Train on another human cell line; cross-test]
+    C3[Add interaction type (inhibitory/activatory)]
+
+    B7 --> C1 --> C2 --> C3
+  end
+
+  %% Phase 4 & 5: Summarize & Conclude
+  C3 --> D1[Summarise and visualize results]
+  D1 --> E1[Conclude]
+```
+
 ## Main papers/resources:
 
 ### Basic GNNs:
