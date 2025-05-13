@@ -11,7 +11,7 @@ flowchart TB
     A1[Gather input data]
     A2[Determine exact format of network inputs/outputs]
     A3[Transform data to required format]
-    A4[Obtain 3D data (ChIA-PET from 4DN)]
+    A4[Obtain ChIA-PET from 4DNucleome]
     A5[Upload data to cloud environment]
     A6[Write preprocessing code for GNN model]
     A7[Preprocess expression data & outputs]
