@@ -4,54 +4,34 @@
 
 #### Data preparation and preprocessing
 
-```mermaid
-flowchart TB
-  %% Phase 1: Data Preparation & Preprocessing
-  subgraph Phase_1["1. Data Preparation & Preprocessing"]
-    A1[Gather input data]
-    A2[Determine exact format of network inputs/outputs]
-    A3[Transform data to required format]
-    A4[Obtain ChIA-PET from 4DNucleome]
-    A5[Upload data to cloud environment]
-    A6[Write preprocessing code for GNN model]
-    A7[Preprocess expression data & outputs]
-    A8[Map Genes/TFs to 3D network locations]
-    A9[Optional Add enhancer data from EnhancerDb]
-    A10[Build network; compute features (Paul et al.)]
-    A11[Check alternative features (Wang et al.)]
-    A12[Assess 3D-feature methods]
-    A13[Make holdout set]
+1. Get expression data from BEELINE
+2. Make preprocessing code that transforms the data to what the network input requires
+3. Get 3D conformation data (ChIA-PET from 4DN)
+4. Map Genes, TFs to their location in 3D network
+5. Create 3D netowrks, integrate with BEELINE data.
+6. Upload data to AWS
+7. Make holdout set
+   
+#### Create GNN model
 
-    A1 --> A2 --> A3 --> A4 --> A5 --> A6 --> A7 --> A8 --> A9
-    A9 --> A10 --> A11 --> A12 --> A13
-  end
+1. Upload the reference notebook to AWS, check all libraries, etc.
+2. Check out Wang et al. as a possible alternative reference implementation (may work better with BEELINE)
+3. Adjust the notebook to use our datasets
+4. Do a technical run (small data set)
+5. Train on a single cell line (hESC)
+6. Check results and time, decide viability of further steps.
 
-  %% Phase 2: GNN Model Preparation & Technical Runs
-  subgraph Phase_2["2. GNN Model Prep & Technical Runs"]
-    B1[Upload reference notebook; verify imports]
-    B2[Review Wang et al. implementation]
-    B3[Technical run (small dataset); record time]
-    B4[Technical run (subset of actual data)]
-    B5[Train on single cell line (hESC)]
-    B6[Evaluate results & timing]
-    B7[Decide on extra runs; limited parameter tuning]
+#### Model adjustments
 
-    A13 --> B1 --> B2 --> B3 --> B4 --> B5 --> B6 --> B7
-  end
+1. Incorporate enhancer data from EnhancerDb
+2. Prepare the No3D network, compare thre results.
+3. Compare between cell lines.
 
-  %% Phase 3: Additional Training Scenarios
-  subgraph Phase_3["3. Additional Training Runs"]
-    C1[Disable 3D features; compare performance]
-    C2[Train on another human cell line; cross-test]
-    C3[Add interaction type (inhibitory/activatory)]
+#### Conclusion
 
-    B7 --> C1 --> C2 --> C3
-  end
-
-  %% Phase 4 & 5: Summarize & Conclude
-  C3 --> D1[Summarise and visualize results]
-  D1 --> E1[Conclude]
-```
+1. Summary metric (F1, AUC)
+2. Visualization of the netowrks
+3. Conclude
 
 ## Main papers/resources:
 
