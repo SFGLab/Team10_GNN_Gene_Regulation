@@ -60,7 +60,7 @@
     B2[Review Wang et al. implementation]
     B3[Technical run using small dataset, record time]
     B4[Technical run with subset of actual data]
-    B5[Train on single cell line (hESC)]
+    B5[Train on single cell line hESC]
     B6[Evaluate results and timing]
     B7[Decide on extra runs, limited parameter tuning]
 
@@ -71,7 +71,7 @@
   subgraph Phase_3["3. Additional Training Runs"]
     C1[Disable 3D features, compare performance]
     C2[Train on another human cell line, cross-test]
-    C3[Add interaction type (inhibitory/activatory)]
+    C3[Add interaction type inhibitory / activatory]
 
     B7 --> C1 --> C2 --> C3
   end
