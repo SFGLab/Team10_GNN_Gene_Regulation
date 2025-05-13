@@ -82,7 +82,7 @@
 
 ```
 
-![workflow.png](workflow.png)
+<img src="./workflow.png" width="50%"/>
 
 ## Main papers/resources:
 
