@@ -16,7 +16,7 @@ flowchart TB
     A6[Write preprocessing code for GNN model]
     A7[Preprocess expression data & outputs]
     A8[Map Genes/TFs to 3D network locations]
-    A9[[Optional] Add enhancer data from EnhancerDb]
+    A9[Optional Add enhancer data from EnhancerDb]
     A10[Build network; compute features (Paul et al.)]
     A11[Check alternative features (Wang et al.)]
     A12[Assess 3D-feature methods]
