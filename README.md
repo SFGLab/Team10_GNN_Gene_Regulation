@@ -1,5 +1,13 @@
 # Team10: GNNs for GRNs
 
+## Aim
+
+Harness 3D genomics data to enhance for GRN predictions from scRNA-Seq
+
+## Contributions
+
+TODO
+
 ## Workflow
 
 #### Data preparation and preprocessing
@@ -84,7 +92,11 @@
 
 <img src="./workflow.png" width="50%"/>
 
-## Main papers/resources:
+## Results
+
+## Conclusiions
+
+## References
 
 ### Basic GNNs:
 1. Quick intro: https://blogs.nvidia.com/blog/what-are-graph-neural-networks/
