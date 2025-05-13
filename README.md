@@ -46,13 +46,12 @@
     A7[Preprocess expression data and outputs]
     A8[Map Genes/TFs to 3D network locations]
     A9[Optional: Add enhancer data from EnhancerDb]
-    A10[Build network, compute features (Paul et al.)]
-    A11[Check alternative features (Wang et al.)]
-    A12[Assess 3D-feature methods]
-    A13[Make holdout set]
+    A10[Build network, compute features Paul et al.]
+    A11[Assess 3D-feature methods]
+    A12[Make holdout set]
 
     A1 --> A2 --> A3 --> A4 --> A5 --> A6 --> A7 --> A8 --> A9
-    A9 --> A10 --> A11 --> A12 --> A13
+    A9 --> A10 --> A11 --> A12
   end
 
   %% Phase 2: GNN Model Preparation and Technical Runs
