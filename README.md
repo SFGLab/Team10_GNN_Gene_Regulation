@@ -28,6 +28,11 @@ Michał Denkiewicz, Paulina Kaczyńska, Sabrina Kwak, Gobikrishnan Subramaniam, 
 7. Technical run (No3D net) [DONE]
 8. Results presentation and visualization [IN_PROGRESS]
 
+For the hESC cell line, The input GRN consits of 18234 nodes (Genes), out of which 14996 have corresponding scRNASeq data.
+
+<p align="center">
+  <img src="./dataComparison.jpg" width="25%"/>
+</p>
 
 ## Installation
 
