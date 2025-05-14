@@ -2,11 +2,11 @@
 
 ## Aim
 
-Harness 3D genomics data to enhance for GRN predictions from scRNA-Seq
+Use Chromatin conformation captrure assay data to enhance for GRN predictions from scRNA-Seq.
 
 ## Contributions
 
-TODO
+Michał Denkiewicz, Paulina Kaczyńska, Sabrina TODO, Gobikrishnan Subramaniam, Jacob Bumgarner, Asha Ajithakumari Sobhanakumar, Palash Sethi, Ammara Saleem, Aleksandra Sobieska
 
 ## Workflow
 
