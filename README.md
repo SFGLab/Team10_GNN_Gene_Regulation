@@ -10,7 +10,9 @@ Michał Denkiewicz, Paulina Kaczyńska, Sabrina Kwak, Gobikrishnan Subramaniam, 
 
 ## Method
 
-<img src="./workflow.png" width="50%"/>
+<p align="center">
+  <img src="./workflow.png" width="50%"/>
+</p>
 
 ### Progress
 
