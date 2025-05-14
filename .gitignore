@@ -6,3 +6,6 @@
 .Rhistory
 .RData
 .Ruserdata
+
+# Ignore local temp directory
+tmp/*
