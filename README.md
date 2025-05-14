@@ -2,11 +2,7 @@
 
 ## Aim
 
-Use Chromatin conformation captrure assay data to enhance for GRN predictions from scRNA-Seq.
-
-## Contributions
-
-Michał Denkiewicz, Paulina Kaczyńska, Sabrina Kwak, Gobikrishnan Subramaniam, Jacob Bumgarner, Asha Ajithakumari Sobhanakumar, Palash Sethi, Ammara Saleem
+Use Chromatin conformation captrure assay data to enhance for GRN predictions from combined expression (scRNA-Seq) and chromosome conformation capture (3D, ChIA-PET) data.
 
 ## Method
 
@@ -34,7 +30,25 @@ For the hESC cell line, The input GRN consits of 18234 nodes (Genes), out of whi
   <img src="./dataComparison.jpg" width="50%"/>
 </p>
 
-## Installation
+### Requirements
+
+* PyTorch Geometric capable system (pref. Linux).
+* Docker is availible [IN PROGRESS]
+
+### Installation
+
+* Install PyTorch Geometric
+* Install dependencies from requirements.txt
+
+  OR
+
+* Download Docker
+
+### Usage
+
+* To start Docker execute: `docker run ...` [TODO]
+* Format your data according to specifications: ...
+* So far: Execute the notebook, placing appropiate data paths
 
 ## Results & Conclusions
 
@@ -58,6 +72,9 @@ For the hESC cell line, The input GRN consits of 18234 nodes (Genes), out of whi
 1. Tunning GNNs (in case we need it): https://machinelearningmastery.com/guide-to-iteratively-tuning-gnns/
 2. More on GRNs: https://www.sciencedirect.com/science/article/pii/S2452310021000184
 
+## Contributions
+
+Michał Denkiewicz, Paulina Kaczyńska, Sabrina Kwak, Gobikrishnan Subramaniam, Jacob Bumgarner, Asha Ajithakumari Sobhanakumar, Palash Sethi, Ammara Saleem
 
 
    
