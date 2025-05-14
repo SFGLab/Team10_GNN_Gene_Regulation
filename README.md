@@ -6,7 +6,7 @@ Use Chromatin conformation captrure assay data to enhance for GRN predictions fr
 
 ## Contributions
 
-Michał Denkiewicz, Paulina Kaczyńska, Sabrina TODO, Gobikrishnan Subramaniam, Jacob Bumgarner, Asha Ajithakumari Sobhanakumar, Palash Sethi, Ammara Saleem, Aleksandra Sobieska
+Michał Denkiewicz, Paulina Kaczyńska, Sabrina Kwak, Gobikrishnan Subramaniam, Jacob Bumgarner, Asha Ajithakumari Sobhanakumar, Palash Sethi, Ammara Saleem, Aleksandra Sobieska
 
 ## Method
 
