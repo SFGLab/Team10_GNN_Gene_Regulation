@@ -31,7 +31,7 @@ Michał Denkiewicz, Paulina Kaczyńska, Sabrina Kwak, Gobikrishnan Subramaniam, 
 For the hESC cell line, The input GRN consits of 18234 nodes (Genes), out of which 14996 have corresponding scRNASeq data.
 
 <p align="center">
-  <img src="./dataComparison.jpg" width="25%"/>
+  <img src="./dataComparison.jpg" width="50%"/>
 </p>
 
 ## Installation
