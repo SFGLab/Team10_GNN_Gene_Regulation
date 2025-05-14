@@ -18,8 +18,7 @@ RUN apt-get update && apt-get install -y python3-pip
 RUN apt-get update && apt-get install -y graphviz graphviz-dev
 
 # install python packages with NGC PyG 24.09 image versions
-RUN pip install torch torch_geometric==2.6.0 triton==3.0.0 numba==0.59.0 requests==2.32.3 opencv-python==4.7.0.72 scipy==1.14.0 jupyterlab==4.2.5 && \
-pip install -r requirements.txt
+RUN pip install torch torch_geometric==2.6.0 triton==3.0.0 numba==0.59.0 requests==2.32.3 opencv-python==4.7.0.72 scipy==1.14.0 jupyterlab==4.2.5 networkx tensorflow scikit-learn clearml seaborn 
 
 # install cugraph
 RUN pip install cugraph-cu12 cugraph-pyg-cu12 --extra-index-url=https://pypi.nvidia.com
