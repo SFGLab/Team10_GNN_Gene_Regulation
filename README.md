@@ -2,99 +2,41 @@
 
 ## Aim
 
-Harness 3D genomics data to enhance for GRN predictions from scRNA-Seq
+Use Chromatin conformation captrure assay data to enhance for GRN predictions from scRNA-Seq.
 
 ## Contributions
 
-TODO
+Michał Denkiewicz, Paulina Kaczyńska, Sabrina Kwak, Gobikrishnan Subramaniam, Jacob Bumgarner, Asha Ajithakumari Sobhanakumar, Palash Sethi, Ammara Saleem, Aleksandra Sobieska
 
-## Workflow
+## Method
 
-#### Data preparation and preprocessing
+<p align="center">
+  <img src="./workflow.png" width="50%"/>
+</p>
 
-1. Get expression data from BEELINE
-2. Make preprocessing code that transforms the data to what the network input requires
-3. Get 3D conformation data (ChIA-PET from 4DN)
-4. Map Genes, TFs to their location in 3D network
-5. Create 3D netowrks, integrate with BEELINE data.
-6. Upload data to AWS
-7. Make holdout set
-   
-#### Create GNN model
+### Progress
 
-1. Upload the reference notebook to AWS, check all libraries, etc.
-2. Check out Wang et al. as a possible alternative reference implementation (may work better with BEELINE)
-3. Adjust the notebook to use our datasets
-4. Do a technical run (small data set)
-5. Train on a single cell line (hESC)
-6. Check results and time, decide viability of further steps.
+1. Get expression data from BEELINE: [DONE]
+   * Evalutaing other cell lines
+2. Get 3D conformation data from 4DN: [IN_PROGRESS]
+3. Make preprocessing code: [IN_PROGRESS]
+4. Map GRN nodes to the 3D data. [TODO]
+5. Setup final shared training environment [IN_PROGRESS]
+   * Problems installing pytorch_geometric on AWS
+   * ...but we have other options
+6. Adjust the notebook to use our datasets [IN_PROGRESS]
+7. Technical run (No3D net) [DONE]
+8. Results presentation and visualization [IN_PROGRESS]
 
-#### Model adjustments
+For the hESC cell line, The input GRN consits of 18234 nodes (Genes), out of which 14996 have corresponding scRNASeq data.
 
-1. Incorporate enhancer data from EnhancerDb
-2. Prepare the No3D network, compare thre results.
-3. Compare between cell lines.
+<p align="center">
+  <img src="./dataComparison.jpg" width="50%"/>
+</p>
 
-#### Conclusion
+## Installation
 
-1. Summary metric (F1, AUC) - use selected BEELINE guidelines
-2. Visualization of the netowrks
-3. Conclude
-
-```mermaid
-   flowchart TB
-  %% Phase 1: Data Preparation and Preprocessing
-  subgraph Phase_1["1. Data Preparation and Preprocessing"]
-    A1[Gather input data]
-    A2[Determine exact format of network inputs/outputs]
-    A3[Transform data to required format]
-    A4[Obtain 3D data ChIA-PET from 4DN]
-    A5[Upload data to cloud environment]
-    A6[Write preprocessing code for GNN model]
-    A7[Preprocess expression data and outputs]
-    A8[Map Genes/TFs to 3D network locations]
-    A9[Optional: Add enhancer data from EnhancerDb]
-    A10[Build network, compute features Paul et al.]
-    A11[Assess 3D-feature methods]
-    A12[Make holdout set]
-
-    A1 --> A2 --> A3 --> A4 --> A5 --> A6 --> A7 --> A8 --> A9
-    A9 --> A10 --> A11 --> A12
-  end
-
-  %% Phase 2: GNN Model Preparation and Technical Runs
-  subgraph Phase_2["2. GNN Model Prep and Technical Runs"]
-    B1[Upload reference notebook, verify imports]
-    B2[Review Wang et al. implementation]
-    B3[Technical run using small dataset, record time]
-    B4[Technical run with subset of actual data]
-    B5[Train on single cell line hESC]
-    B6[Evaluate results and timing]
-    B7[Decide on extra runs, limited parameter tuning]
-
-    A13 --> B1 --> B2 --> B3 --> B4 --> B5 --> B6 --> B7
-  end
-
-  %% Phase 3: Additional Training Scenarios
-  subgraph Phase_3["3. Additional Training Runs"]
-    C1[Disable 3D features, compare performance]
-    C2[Train on another human cell line, cross-test]
-    C3[Add interaction type inhibitory / activatory]
-
-    B7 --> C1 --> C2 --> C3
-  end
-
-  %% Phase 4 and 5: Summarize and Conclude
-  C3 --> D1[Summarize and visualize results]
-  D1 --> E1[Conclude]
-
-```
-
-<img src="./workflow.png" width="50%"/>
-
-## Results
-
-## Conclusiions
+## Results & Conclusions
 
 ## References
 

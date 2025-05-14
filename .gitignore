@@ -1,0 +1,8 @@
+# Ignore local files
+**/.DS_Store
+
+# Ignore RStudio files
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
