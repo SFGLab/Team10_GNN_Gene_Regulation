@@ -1,0 +1,22 @@
+name: test_gnngrn
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.10
+  - numpy
+  - pandas
+  - matplotlib
+  - scikit-learn
+  - pip
+  - pip:
+      - clearml
+      - opencv-python
+      - torch-geometric==2.6.0
+      - triton==3.0.0
+      - numba==0.59.0
+      - requests==2.32.3
+      - scipy==1.14.0
+      - jupyterlab==4.2.5
+      - networkx
+      - seaborn

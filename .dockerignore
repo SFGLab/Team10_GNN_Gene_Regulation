@@ -1,0 +1,23 @@
+# Version control
+.git/
+.gitignore
+
+# Python cache and artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+
+# Development and virtual environments
+.env
+.venv/
+venv/
+Pipfile.lock
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+*.log
