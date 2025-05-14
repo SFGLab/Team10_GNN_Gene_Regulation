@@ -10,46 +10,26 @@ Michał Denkiewicz, Paulina Kaczyńska, Sabrina Kwak, Gobikrishnan Subramaniam, 
 
 ## Method
 
-## Installation
-
-## Results
-
-## Progress
-
-1. Get expression data from BEELINE
-2. Make preprocessing code that transforms the data to what the network input requires
-3. Get 3D conformation data (ChIA-PET from 4DN)
-4. Map Genes, TFs to their location in 3D network
-5. Create 3D netowrks, integrate with BEELINE data.
-6. Upload data to AWS
-7. Make holdout set
-   
-#### Create GNN model
-
-1. Upload the reference notebook to AWS, check all libraries, etc.
-2. Check out Wang et al. as a possible alternative reference implementation (may work better with BEELINE)
-3. Adjust the notebook to use our datasets
-4. Do a technical run (small data set)
-5. Train on a single cell line (hESC)
-6. Check results and time, decide viability of further steps.
-
-#### Model adjustments
-
-1. Incorporate enhancer data from EnhancerDb
-2. Prepare the No3D network, compare thre results.
-3. Compare between cell lines.
-
-#### Conclusion
-
-1. Summary metric (F1, AUC) - use selected BEELINE guidelines
-2. Visualization of the netowrks
-3. Conclude
-
 <img src="./workflow.png" width="50%"/>
 
-## Results
+### Progress
 
-## Conclusiions
+1. Get expression data from BEELINE: [DONE]
+   *. Evalutaing other cell lines
+2. Get 3D conformation data from 4DN: [IN_PROGRESS]
+3. Make preprocessing code: [IN_PROGRESS]
+4. Map GRN nodes to the 3D data. [TODO]
+5. Setup final shared training environment [IN_PROGRESS]
+   *. Problems installing pytorch_geometric on AWS
+   *. ...but we have other options
+6. Adjust the notebook to use our datasets [IN_PROGRESS]
+7. Technical run (No3D net) [DONE]
+8. Results presentation and visualization [IN_PROGRESS]
+
+
+## Installation
+
+## Results & Conclusions
 
 ## References
 
