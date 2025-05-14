@@ -50,6 +50,16 @@ from sklearn.metrics import (
     f1_score, top_k_accuracy_score, auc
 )
 
+import torch
+import torch.nn.functional as F
+from torch_geometric.utils import negative_sampling
+from torch_geometric.transforms import RandomLinkSplit
+from sklearn.metrics import (
+    roc_auc_score, roc_curve, precision_recall_curve,
+    matthews_corrcoef, jaccard_score, cohen_kappa_score,
+    f1_score, top_k_accuracy_score, auc
+)
+
 class Net(torch.nn.Module):
     def __init__(self, in_channels, hidden1_channels, hidden2_channels, out_channels, dec, af_val, num_layers, epoch, aggr, var):
         super().__init__()
@@ -85,7 +95,7 @@ class Net(torch.nn.Module):
             return output
 
 
-def train_link_predictor(model, train_data, val_data, optimizer, criterion, n_epochs, af_val, dec, model_id):
+def train_link_predictor(model, train_data, val_data, optimizer, scheduler, criterion, n_epochs, af_val, dec, model_id):
     logger = Task.current_task().get_logger()
 
     # Pre-sample negative edges for validation to ensure consistency
@@ -136,13 +146,14 @@ def train_link_predictor(model, train_data, val_data, optimizer, criterion, n_ep
 
         # Logging training loss
         logger.report_scalar("loss", "train", iteration=epoch, value=loss.item())
-        optimizer.step()
 
         # Evaluation with balanced validation set
-        val_auc, precision, recall, fpr, tpr, mcc, jac_score, cohkap_score, f1, top_k = eval_link_predictor(
+        val_auc, precision, recall, fpr, tpr, mcc, jac_score, cohkap_score, f1, top_k, val_loss = eval_link_predictor(
             model, val_data, af_val, dec, criterion, epoch, use_balanced=True
         )
-
+        print("Epoch: ", epoch, "Loss: ", loss.item(), "Val Loss: ", val_loss, "f1: ", f1, 'AUC: ', val_auc)
+        scheduler.step(val_loss)
+        optimizer.step()
         # Logging validation metrics
         logger.report_scalar("AUC", "val", iteration=epoch, value=val_auc)
         logger.report_scalar("F1 Score", "val", iteration=epoch, value=f1)
@@ -181,11 +192,10 @@ def eval_link_predictor(model, data, af_val, dec, criterion=None, epoch=None, us
 
     out = model.decode(z, edge_label_index, dec)
 
-    # Optional loss logging
-    if criterion is not None:
-        loss = criterion(out.view(-1), edge_label.float())
-        logger.report_scalar("loss", "val", iteration=epoch or 0, value=loss.item())
-
+    loss = criterion(out.view(-1), edge_label.float())
+    logger.report_scalar("loss", "val", iteration=epoch or 0, value=loss.item())
+    out = torch.sigmoid(out)
+    print(out, edge_label)
     # Convert to CPU for sklearn metrics
     actual = edge_label.cpu().numpy()
     pred_scores = out.cpu().numpy()
@@ -207,7 +217,7 @@ def eval_link_predictor(model, data, af_val, dec, criterion=None, epoch=None, us
     f1 = f1_score(actual, pred_binary)
     top_k = top_k_accuracy_score(actual, pred_scores, k=1)
 
-    return auc, precision, recall, fpr, tpr, mcc, jac_score, cohkap_score, f1, top_k
+    return auc, precision, recall, fpr, tpr, mcc, jac_score, cohkap_score, f1, top_k, loss
 
 
 def main_run(hidden1_channels, hidden2_channels, out_channels, data, dec, af_val, num_layers, epoch, aggr, var, device):
@@ -215,17 +225,17 @@ def main_run(hidden1_channels, hidden2_channels, out_channels, data, dec, af_val
     aucs = 0
 
     # Multiple runs for stability
-    for i in range(10):
+    for i in range(1):
         # Use fixed seed for reproducibility
         torch.manual_seed(42 + i)
 
         # Create data split
         split = RandomLinkSplit(
-            num_val=0.2,
-            num_test=0.3,
-            is_undirected=False,
+            num_val=0.1,
+            num_test=0.2,
+            is_undirected=True,
             add_negative_train_samples=True,
-            neg_sampling_ratio=2.0,
+            neg_sampling_ratio=1.0,
         )
 
         train_data, val_data, test_data = split(data)
@@ -238,17 +248,30 @@ def main_run(hidden1_channels, hidden2_channels, out_channels, data, dec, af_val
         ).to(device)
 
         # Initialize optimizer and loss function
-        optimizer = torch.optim.Adam(params=model.parameters(), lr=0.0001)
+        optimizer = torch.optim.Adam(params=model.parameters(), lr=0.01)
+        scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'min', patience=5)
         criterion = torch.nn.BCEWithLogitsLoss()
-
+        task.set_parameters({
+                "model_architecture": model.__class__.__name__,
+                "decoder": dec,
+                "activation_function": af_val,
+                "num_layers": num_layers,
+                "optimizer": optimizer.__class__.__name__,
+                "initial_learning_rate": optimizer.param_groups[0]['lr'],
+                "epochs": epoch,
+                #"patience": patience,
+                #"weight_decay_factor": weight_decay_factor,
+                #"min_learning_rate": min_lr,
+                #"monitor_metric": monitor_metric
+            })
         # Train model
         model = train_link_predictor(
-            model, train_data, val_data, optimizer, criterion, epoch, af_val, dec, 'test_basic'
+            model, train_data, val_data, optimizer, scheduler, criterion, epoch, af_val, dec, 'test_basic'
         ).to(device)
 
         # Evaluate on test set (with balanced negative sampling)
-        test_auc, precision, recall, fpr, tpr, mcc, jac_score, cohkap_score, f1, top_k = eval_link_predictor(
-            model, test_data, af_val, dec, use_balanced=True
+        test_auc, precision, recall, fpr, tpr, mcc, jac_score, cohkap_score, f1, top_k, test_loss = eval_link_predictor(
+            model, test_data, af_val, dec, criterion, use_balanced=True
         )
 
         # Calculate metrics
@@ -262,8 +285,8 @@ def main_run(hidden1_channels, hidden2_channels, out_channels, data, dec, af_val
 
     # Create results dataframe
     result = {
-        "org": org,
-        "ds": ds,
+        #"org": org,
+        #"ds": ds,
         "dec": dec,
         "af_val": af_val,
         "num_layers": num_layers,
@@ -282,19 +305,20 @@ def main_run(hidden1_channels, hidden2_channels, out_channels, data, dec, af_val
     df = pd.DataFrame([result])
     return df, model
 
+
 if __name__=='main':
 
     path = "/content/drive/MyDrive/BEELINE"
-    gold_std = "/content/drive/MyDrive/BEELINE/basic_data_hESC.pt"
+    gold_std = "/content/drive/MyDrive/BEELINE/basic_data_aug_hESC.pt"
 
 
     parameters = {
         "decoder": ["dot_sum"],# substitute "cos" to use cos decoder
-        "af": ["F.sigmoid"],  # substitute "F.silu","F.tanh" for activation functions
+        "af": ["F.silu"],#"F.sigmoid"],  # substitute "F.silu","F.tanh" for activation functions
         "num_layers" : [3],#2,4,5 #substitute layer count
-        "variant" : ["HypergraphConv"],#,"SSGConv","ChebConv","ClusterGCNConv" #substitute convolution layers
+        "variant" : ["HypergraphConv"],#,"ChebConv", 'GATConv'],#,"SSGConv","ChebConv","ClusterGCNConv" #substitute convolution layers
         "aggrs" :["sum"],# substitute "add"
-        "epochs" :[100]# substitute epochs 100,150,200,250
+        "epochs" :[150]# substitute epochs 100,150,200,250
                 }
 
 
@@ -302,34 +326,29 @@ if __name__=='main':
     hidden1_channels=128
     hidden2_channels=64
     out_channels= 32
-    num_layers = 4
-    final_out = pd.DataFrame()
+    final_out = []
 
     #ds_type =["basic_aug_data_"] # Try different graph types : "basic_TS_data_","basic_TS_aug_data_","basic_data_"
 
     # final_out = pd.DataFrame()
-
+    data = torch.load(gold_std, weights_only=False)#+ds+org+"_"+files[0]+".pt")#.cuda()
+    data.x = data.x.to(torch.float32)
+    data.edge_index = data.edge_index.to(torch.int64)
     for dec in parameters.get('decoder'):
         for lay_num in parameters.get('num_layers'):
             for epoch in parameters.get('epochs'):
                 for af_val in parameters.get('af'):
                     for aggr in parameters.get('aggrs'):
                         for var in parameters.get('variant'):
-                            task = Task.init(
+                            task = Task.create(
                                 project_name="GNN-GRN",
-                                task_name=var+str(num_layers),
+                                task_name=var+str(lay_num)+"_"+dec+"_scheduler",
                                 task_type=Task.TaskTypes.training  # or .inference, .data_processing, etc.
                             )
-                            # for dim in parameters.get('hc'):
-                            #print("current location : "+str(org)+'_'+str(ds)+'_'+str(dec)+'_'+str(lay_num)+'_'+str(epoch)+'_'+str(af_val)+'_'+str(aggr)+'_'+str(var))
-                            #print(path+ds+org+"_"+files[0]+".pt")
-                            data = torch.load(gold_std, weights_only=False)#+ds+org+"_"+files[0]+".pt")#.cuda()
-                            data.x = data.x.to(torch.float32)
-                            data.edge_index = data.edge_index.to(torch.int64)
-                            #GSE1297 = torch.load("/content/drive/MyDrive/Colab Notebooks/DREAM challenge GCN GNN Experimentation/Human.pt").cuda()
-                            temp,model = main_run(hidden1_channels,hidden2_channels,out_channels,data,dec,af_val,lay_num,epoch,aggr,var, device)
-                            #pred = prediction(model, GSE1297,af_val,dec)
-                            final_out = final_out.append(temp)
 
-    print(final_out)
-# final_out.to_excel('/content/drive/MyDrive/Colab Notebooks/DREAM challenge GCN GNN Experimentation/DREAM5_InsilicoSize100_'+str(org)+'_'+var+'Dimension_count.xlsx', index=False)
+                            temp,model = main_run(hidden1_channels,hidden2_channels,out_channels,data,dec,af_val,lay_num,epoch,aggr,var, device)
+                            final_out.append(temp)
+                            task.close()
+
+    print(pd.concat(final_out))
+    # final_out.to_excel('/content/drive/MyDrive/Colab Notebooks/DREAM challenge GCN GNN Experimentation/DREAM5_InsilicoSize100_'+str(org)+'_'+var+'Dimension_count.xlsx', index=False)
