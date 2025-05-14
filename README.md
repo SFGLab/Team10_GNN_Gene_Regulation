@@ -17,13 +17,13 @@ Michał Denkiewicz, Paulina Kaczyńska, Sabrina Kwak, Gobikrishnan Subramaniam, 
 ### Progress
 
 1. Get expression data from BEELINE: [DONE]
-   *. Evalutaing other cell lines
+   * Evalutaing other cell lines
 2. Get 3D conformation data from 4DN: [IN_PROGRESS]
 3. Make preprocessing code: [IN_PROGRESS]
 4. Map GRN nodes to the 3D data. [TODO]
 5. Setup final shared training environment [IN_PROGRESS]
-   *. Problems installing pytorch_geometric on AWS
-   *. ...but we have other options
+   * Problems installing pytorch_geometric on AWS
+   * ...but we have other options
 6. Adjust the notebook to use our datasets [IN_PROGRESS]
 7. Technical run (No3D net) [DONE]
 8. Results presentation and visualization [IN_PROGRESS]
