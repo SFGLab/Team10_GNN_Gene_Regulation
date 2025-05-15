@@ -1,8 +1,10 @@
-# Team10: GNN4GNR-3D: Gene regulation prediciton from scRNA-Seq expression and 3D genomic data.
+# Team10: GNN4GRN-3D: Gene regulation prediciton from scRNA-Seq expression and 3D genomic data.
 
 ## Aim
 
-Use Chromatin conformation captrure assay data to enhance for GRN predictions from combined expression (scRNA-Seq) and chromosome conformation capture (3D, ChIA-PET) data.
+We use Chromatin conformation captrure assay data to enhance for GRN predictions from combined expression (scRNA-Seq) and chromosome conformation capture (3D, ChIA-PET) data.
+
+We provide an extensible framework for training GNN models on custom datasets, adding the ability to adjust and provide custom features by the user without the need to rewrite training code. We build on previous approaches (Paul et al. 2024) in particular by incorporating chromosome conformation capture data (Hi-C), to improve the GRN predictions from scRNA-Seq to bridge graph-based machine learning and 3D Genomics.
 
 ## Contributions
 
@@ -16,12 +18,21 @@ TODO: fix, so that instad of two sequential 3D and No3D, we have 3 parallel boxe
   <img src="./img/workflow.png" width="50%"/>
 </p>
 
-We prepared the dataset for the hESC cell line from the BEELINE dataset.
+* For assessment of GNN4GNR-3D we focus on hESC data as an example
+* We prepared the dataset for the hESC cell line from the BEELINE dataset.
 For the hESC cell line, The input GRN consits of 18234 nodes (Genes), out of which 14996 have corresponding scRNASeq data.
 
 <p align="center">
   <img src="./img/dataComparison.jpg" width="50%"/>
 </p>
+
+* We use BEELINE data (Pratapa et al., 2020): the interactions forming GRNs are the predicted data, while the scRNA-Seq data is used as input
+We combine this with the Chromosome Conformation Capture (3D) data for the same cell line.
+* Data preprocessing: scRNA-Seq matrix is imputed to an autoencoder to produce embeddings, serving as primary features for the network nodes
+* The 3D genomics data is employed as follows: each gene is mapped to a loci using the appropriate assembly, and a signal value is extracted for each gene-gene pair from the Hi-C matric (maximum value of O/E). Pairs that exceed a specified threshold form edges of the new network.
+* The GNN architecture is based on (Paul et al. 2024).
+* Additional node features are added: augmented features computed from the GRN structure (as in base work: betweenness centrality, PageRank score, node degree, clustering coefficient). Importantly, node features are added that contain data relating to 3D structure: each gene-node is mapped to its genomic location, and assigned to a node in the 3D network. Then, betweenness centrality, page rank, degree, clustering coefficient of the gene-node in the 3D network.
+* 3 types of models are produced for each dataset: Base (pure expression data), Aug (with network science features calculated from the GRN network), ad finally Aug3D (with features extracted both from GRN and 3D network)
 
 ## Installation & Usage
 
@@ -53,15 +64,13 @@ TODO
 
 ## Results
 
-We performed TODO: descripbe training
+We performed TODO: describe training
 * data splits
 * neg. set construction
 * used parameters
 * architecture overview
 
-Performance is lower than the one reported in literature (however, we fixed a bug?)
-
-Augumentation improves performance slightly
+Performance on our dataset is lower than the one reported in (Paul et al. 2024), however we identifed a possible issue. Augumentation improves performance slightly.
 
 3D augumentaion results in TODO
 
@@ -79,12 +88,19 @@ Training trajectories:
 
 ## Conclusions
 
+We provide an extensible framework for training GNN models for GRN edge prediction on custom datasets, adding the ability to adjust and provide custom features by the user without the need to rewrite training code.
+
 ## Future directions
 
-1. More comprehensive review of datasets
-2. Improve negative set construction
-3. Evaluate feature importance
-4. Improve the usability and configurability
+1. Add more architecture configuration options, expand the number of networks used
+2. More comprehensive review of datasets
+3. Add enhancer data to the network
+4. Provide an automated 3D network generation method
+
+Technical:
+1. Improve negative set construction
+2. Evaluate feature importance
+3. Improve the usability and configurability
 
 ## References
 
