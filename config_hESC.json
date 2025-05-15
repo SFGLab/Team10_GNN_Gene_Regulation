@@ -1,0 +1,8 @@
+{    
+    "data_path": "./data/BEELINE-data/inputs/scRNA-Seq/hESC",
+    "data3d_path": "TODO.txt",
+    "gold_std": "./data/BEELINE-Networks/Networks/human/hESC-ChIP-seq-network.csv",
+    "preprocessed_dir": "./data/BEELINE/hESC/",
+    "output_dir": "./data/BEELINE/hESC/"
+}
+

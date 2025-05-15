@@ -1,0 +1,7 @@
+{    
+    "data_path": "./BEELINE/",    
+    "data3d_path": "TODO.txt",
+    "gold_std": "./BEELINE/hESC-ChIP-seq-network.csv",
+    "preprocessed_dir": "./BEELINE/hESC/",
+    "output_dir": "./BEELINE/hESC/"
+}
