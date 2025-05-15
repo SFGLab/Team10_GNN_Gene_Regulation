@@ -103,19 +103,6 @@ GNN-GRN approaches:
 2. More on GRNs: https://www.sciencedirect.com/science/article/pii/S2452310021000184
 3. https://bio.liclab.net/scGRN/index.php - extra data?
 4. DREAM5: (v.old) https://www.synapse.org/Synapse:syn2820440/wiki/71026 - extra data?
-1. Quick intro: https://blogs.nvidia.com/blog/what-are-graph-neural-networks/
+5. Quick intro: https://blogs.nvidia.com/blog/what-are-graph-neural-networks/
 
-### Progress (legacy)
-
-1. Get expression data from BEELINE: [DONE]
-   * Evalutaing other cell lines
-2. Get 3D conformation data from 4DN: [IN_PROGRESS]
-3. Make preprocessing code: [IN_PROGRESS]
-4. Map GRN nodes to the 3D data. [TODO]
-5. Setup final shared training environment [IN_PROGRESS]
-   * Problems installing pytorch_geometric on AWS
-   * ...but we have other options
-6. Adjust the notebook to use our datasets [IN_PROGRESS]
-7. Technical run (No3D net) [DONE]
-8. Results presentation and visualization [IN_PROGRESS]
    
