@@ -10,15 +10,17 @@ Michał Denkiewicz, Paulina Kaczyńska, Sabrina Kwak, Gobikrishnan Subramaniam, 
 
 ## Method
 
+TODO: fix, so that instad of two sequential 3D and No3D, we have 3 parallel boxes: Base, Aug, Aug3D
+
 <p align="center">
-  <img src="./workflow.png" width="50%"/>
+  <img src="./img/workflow.png" width="50%"/>
 </p>
 
 We prepared the dataset for the hESC cell line from the BEELINE dataset.
 For the hESC cell line, The input GRN consits of 18234 nodes (Genes), out of which 14996 have corresponding scRNASeq data.
 
 <p align="center">
-  <img src="./dataComparison.jpg" width="50%"/>
+  <img src="./img/dataComparison.jpg" width="50%"/>
 </p>
 
 ## Installation & Usage
@@ -62,6 +64,18 @@ Performance is lower than the one reported in literature (however, we fixed a bu
 Augumentation improves performance slightly
 
 3D augumentaion results in TODO
+
+Resulting scores:
+|    | dec     | af_val   |   num_layers |   epoch | aggr   | var            |      auc |     aupr |       mcc |   jac_score |   cohkap_score |       f1 |   top_k | aug    |
+|---:|:--------|:---------|-------------:|--------:|:-------|:---------------|---------:|---------:|----------:|------------:|---------------:|---------:|--------:|:-------|
+|  0 | dot_sum | F.silu   |            3 |     200 | sum    | HypergraphConv | 0.992565 | 0.981231 | 0.0889979 |     0.25594 |      0.0157168 | 0.407568 | 0.27321 | no_aug |
+|  0 | dot_sum | F.silu   |            3 |     200 | sum    | HypergraphConv | 0.732785 | 0.688903 | 0         |     0.25    |      0         | 0.4      | 0.25    | aug    |
+|  0 | dot_sum | F.silu   |            3 |     200 | sum    | HypergraphConv | 0.732784 | 0.688903 | 0         |     0.25    |      0         | 0.4      | 0.25    | aug3d  |
+
+Training trajectories:
+<p align="center">
+  <img src="./img/train.png" width="80%"/>
+</p>
 
 ## Conclusions
 
