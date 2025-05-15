@@ -114,22 +114,12 @@ Technical:
 3. Improve the usability and configurability
 
 ## References
-
-TODO: Write it as proper markdown.
-
-GNN review https://journalofbigdata.springeropen.com/articles/10.1186/s40537-023-00876-
-BEELINE: https://pmc.ncbi.nlm.nih.gov/articles/PMC7098173/ and https://zenodo.org/records/3701939
-
-GNN-GRN approaches:
-1. https://www.sciencedirect.com/science/article/pii/S1568494624006732#da1 - we treat this as a baseline, they also provide code using PyTorch Geometric
-2. https://www.sciencedirect.com/science/article/pii/S200103702030444X
-3. https://genome.cshlp.org/content/32/5/930.full
-
-## Misc. resources
-1. Tunning GNNs (in case we need it): https://machinelearningmastery.com/guide-to-iteratively-tuning-gnns/
-2. More on GRNs: https://www.sciencedirect.com/science/article/pii/S2452310021000184
-3. https://bio.liclab.net/scGRN/index.php - extra data?
-4. DREAM5: (v.old) https://www.synapse.org/Synapse:syn2820440/wiki/71026 - extra data?
-5. Quick intro: https://blogs.nvidia.com/blog/what-are-graph-neural-networks/
-
-   
+AKERS, K. & MURALI, T. J. C. O. I. S. B. 2021. Gene regulatory network inference in single-cell biology. 26, 87-97.
+JEREESH, A. & KUMAR, G. S. J. A. S. C. 2024. Reconstruction of gene regulatory networks using graph neural networks. 163, 111899.
+KARBALAYGHAREH, A., SAHIN, M. & LESLIE, C. S. J. G. R. 2022. Chromatin interaction–aware gene regulatory modeling with graph attention networks. 32, 930-944.
+KHEMANI, B., PATIL, S., KOTECHA, K. & TANWAR, S. J. J. O. B. D. 2024. A review of graph neural networks: concepts, architectures, techniques, challenges, datasets, applications, and future directions. 11, 18.
+Li, C., 2025. scGRN: A comprehensive single-cell multi-omics gene regulatory network platform of human and mouse. scGRN. https://bio.liclab.net/scGRN/index.php [Accessed 15 May 2025].
+Marbach, D., et al., 2012. DREAM5 Network Inference Challenge. Synapse. https://www.synapse.org/Synapse:syn2820440/wiki/71026 [Accessed 15 May 2025].
+NVIDIA, 2021. What are graph neural networks? NVIDIA Blog. https://blogs.nvidia.com/blog/what-are-graph-neural-networks/ [Accessed 15 May 2025].
+PRATAPA, A., JALIHAL, A. P., LAW, J. N., BHARADWAJ, A. & MURALI, T. J. N. M. 2020. Benchmarking algorithms for gene regulatory network inference from single-cell transcriptomic data. 17, 147-154.
+WANG, J., MA, A., MA, Q., XU, D., JOSHI, T. J. C. & JOURNAL, S. B. 2020. Inductive inference of gene regulatory network using supervised and semi-supervised graph neural networks. 18, 3335-3343.
