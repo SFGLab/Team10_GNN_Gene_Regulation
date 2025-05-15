@@ -73,22 +73,18 @@ TODO
 
 ## Results
 
-We performed TODO: describe training
-* data splits
-* neg. set construction
-* used parameters
-* architecture overview
+We use an encoder-decoder architecture with three HyperGraphConv layers in the encoder module, trained for the link prediction task, similarly to Paul et al. (2024). The dataset is split into training, validation, and test sets using RandomLinkSplit from PyTorch Geometric, and is augmented with negative edges to ensure balance. Validation and testing are also conducted on the balanced dataset. Negative edges are randomly sampled from all possible non-existent edges between nodes in the respective split.
 
-Performance on our dataset is lower than the one reported in (Paul et al. 2024), however we identifed a possible issue. Augumentation improves performance slightly.
+We use the Adam optimizer with a learning rate scheduler that reduces the learning rate by a factor of 0.1 if the validation loss does not decrease for five consecutive epochs. The loss function used is BCEWithLogitsLoss. In contrast to Paul et al. (2024), we add a sigmoid layer at the end of the network during validation and testing, so that the evaluation metrics are computed on values representing the probability of an edge existing.
 
-3D augumentaion results in TODO
+Similar to Paul et al. (2024), augmentation slightly improves performance.
 
-Resulting scores:
+Resulting scores on test set:
 |    | dec     | af_val   |   num_layers |   epoch | aggr   | var            |      auc |     aupr |       mcc |   jac_score |   cohkap_score |       f1 |   top_k | aug    |
 |---:|:--------|:---------|-------------:|--------:|:-------|:---------------|---------:|---------:|----------:|------------:|---------------:|---------:|--------:|:-------|
 |  0 | dot_sum | F.silu   |            3 |     200 | sum    | HypergraphConv | 0.992565 | 0.981231 | 0.0889979 |     0.25594 |      0.0157168 | 0.407568 | 0.27321 | no_aug |
-|  0 | dot_sum | F.silu   |            3 |     200 | sum    | HypergraphConv | 0.732785 | 0.688903 | 0         |     0.25    |      0         | 0.4      | 0.25    | aug    |
-|  0 | dot_sum | F.silu   |            3 |     200 | sum    | HypergraphConv | 0.732784 | 0.688903 | 0         |     0.25    |      0         | 0.4      | 0.25    | aug3d  |
+|  0 | dot_sum | F.silu   |            3 |     200 | sum    | HypergraphConv | 0.987375 | 0.980063 | 0.383218  |     0.362427|      0.262330  | 0.532031 | 0.564721| aug    |
+|  0 | dot_sum | F.silu   |            3 |     200 | sum    | HypergraphConv | -        | -        | -         |     -       |      -         | -        | -       | aug3d  |
 
 Training trajectories:
 <p align="center">
