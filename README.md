@@ -20,8 +20,6 @@ Michał Denkiewicz, Paulina Kaczyńska, Sabrina Kwak, Gobikrishnan Subramaniam, 
 
 ## Method
 
-TODO: fix, so that instad of two sequential 3D and No3D, we have 3 parallel boxes: Base, Aug, Aug3D
-
 <p align="center">
   <img src="./img/workflow.png" width="50%"/>
 </p>
