@@ -6,6 +6,14 @@ We use Chromatin conformation captrure assay data to enhance for GRN predictions
 
 We provide an extensible framework for training GNN models on custom datasets, adding the ability to adjust and provide custom features by the user without the need to rewrite training code. We build on previous approaches (Paul et al. 2024) in particular by incorporating chromosome conformation capture data (Hi-C), to improve the GRN predictions from scRNA-Seq to bridge graph-based machine learning and 3D Genomics.
 
+### Use cases:
+
+* Inference of Gene Regulatory Networks (GRNs): Predict novel gene-gene regulatory interactions based on expression patterns, for wet lab biologists to verify.
+* Integration of Custom Biological Features: Incorporate prior biological knowledge (e.g., transcription factor motifs, chromatin accessibility, cell type annotations) as node features to improve model accuracy.
+* Cell-Type Specific GRN Discovery: Enable GRN predictions that are specific to particular cell types.
+* Tool for Multi-omics Data Integration: Extendable framework to incorporate other omics layers (e.g., scATAC-seq, proteomics) alongside scRNA-Seq for richer GRN modeling.
+
+
 ## Contributions
 
 Michał Denkiewicz, Paulina Kaczyńska, Sabrina Kwak, Gobikrishnan Subramaniam, Jacob Bumgarner, Asha Ajithakumari Sobhanakumar, Palash Sethi, Ammara Saleem
