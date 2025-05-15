@@ -139,7 +139,7 @@ def data_preprocessing(
             torch.tensor(node_features.values),
             torch.tensor([list(x.values()) for x in aug_featues_grn + aug_featues_g3d]).T
         ], axis=1)
-    basic_aug_data.edge_index = torch.tensor(gold.values).T
+    basic_aug3d_data.edge_index = torch.tensor(gold.values).T
     return basic_data, basic_aug_data, basic_aug3d_data
 
 
