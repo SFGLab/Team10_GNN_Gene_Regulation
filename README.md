@@ -1,4 +1,4 @@
-# Team10: GNN4GNR-3D: Gene regularion prediciton from scRNA-Seq expression and 3D genomic data.
+# Team10: GNN4GNR-3D: Gene regulation prediciton from scRNA-Seq expression and 3D genomic data.
 
 ## Aim
 
