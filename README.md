@@ -47,7 +47,16 @@ We combine this with the Chromosome Conformation Capture (3D) data for the same 
 
 ### Input data format
 
-TODO
+Place paths to the input 
+* Expression data (scRNA-Seq): a `GeneExpression.csv` file with row and column headers: rows are genes, columns are samples
+* Names of all genes in the network: a `GeneOrdering.csv` file, with the first column containing the gene names. First row contains header. The other columns are ignored.
+* Ground truth network: a `.csv` file, containing the edges of the GRNs, example:
+  ```
+  Gene1,Gene2
+  AR,MTRNR2L2
+  AR,MTRNR2L8
+  AR,RGPD2
+  ```
 
 ### Direct installation
 
