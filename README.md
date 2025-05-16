@@ -73,9 +73,17 @@ Place paths to the input
 5. Train a network using `train.py` TODO: elaborate
 6. TODO: a way to use a ready network for prediction
   
-### Using docker
+### Using Docker
 
-TODO
+- Build & run Dockerfile
+```shell
+docker build -t test_GNN4GRN-3D .
+docker run --rm -it test_GNN4GRN-3D 
+```
+- To run with all gpus enabled:
+```shell
+docker run --gpus all -it --rm test_GNN4GRN-3D
+```
 
 ## Results
 
